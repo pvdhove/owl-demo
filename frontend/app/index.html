@@ -13,7 +13,8 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+    <link rel="stylesheet" href="styles/dropzone.css">
+    <link rel="stylesheet" href="styles/d3.css">
 
     <!-- endbuild -->
   </head>
@@ -41,9 +42,8 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
+              <li class="active"><a href="#/">InceptionV3</a></li>
+              <li><a ng-href="#/">NeuralTrans</a></li>
             </ul>
           </div>
         </div>
@@ -51,12 +51,12 @@
     </div>
 
     <div class="container">
-    <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+    <div ng-include="'views/main.html'" ng-controller="fileCtrl" ng-cloak></div>
     </div>
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p><span class="glyphicon glyphicon-heart"></span> from the Owl team</p>
       </div>
     </div>
 
@@ -71,7 +71,9 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/directives/main.js"></script>
+    <script src="scripts/dropzone/dropzone.js"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
     <!-- endbuild -->
-    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
 </body>
 </html>

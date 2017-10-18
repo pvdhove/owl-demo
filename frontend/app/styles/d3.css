@@ -1,0 +1,21 @@
+.axis path,
+.axis line{
+  fill: none;
+  stroke:black;
+  shape-rendering:crispEdge;
+}
+
+.tick
+{
+  stroke-dasharray: 1, 2;
+}
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: black;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
