@@ -3,6 +3,8 @@ from flask import request, jsonify
 from flask_cors import CORS, cross_origin
 from werkzeug import secure_filename
 import os, subprocess, json
+from subprocess import call
+
 
 app = Flask(__name__)
 CORS(app)
@@ -27,7 +29,12 @@ def index():
             filename = secure_filename(f.filename)
             file_addr = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             f.save(file_addr)
-            resp = subprocess.check_output(['apps/inceptionv3/inception_classifier', file_addr])
+
+            img_addr, img_extension = os.path.splitext(file_addr)
+            new_img_addr = img_addr + '.ppm'
+            comm = "convert " + file_addr +  " -resize " + "299x299\\! " + new_img_addr
+            os.system(comm)
+            resp = subprocess.check_output(['apps/inceptionv3/inception_classifier', new_img_addr])
             #d = json.loads(resp)
             return resp
         else:
