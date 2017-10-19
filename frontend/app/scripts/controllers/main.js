@@ -25,6 +25,7 @@
 angular.module('owlDemoApp')
    .controller('fileCtrl', fileCtrl);
 
+/**
 angular.module('owlDemoApp')
   .controller('MainCtrl', function () {
     this.awesomeThings = [
@@ -33,14 +34,25 @@ angular.module('owlDemoApp')
       'Karma'
     ];
   });
+*/
 
 angular.module('owlDemoApp')
   .controller('SalesController', ['$scope', function($scope){
-    $scope.salesData=[
+    /*$scope.salesData=[
         {name: "panda", value: 0.95},
         {name: "little panda", value: 0.02},
         {name: "monkey", value: 0.015},
         {name: "tiger, india tiger", value: 0.01},
         {name: "oven", value: 0.005}
-    ];
+    ]; */
+    $scope.classification = {};
+    $scope.classchanged = false;
+    $scope.$watch('classification', function(oldVal, newVal){
+      if ( oldVal != newVal){
+        $scope.classchanged = true;
+        $timeout(function(){
+          $scope.classchanged = false;
+        }, 5);
+      }
+    })
 }]);

@@ -1,9 +1,14 @@
 'use strict';
 
+
 function dropzone() {
 
-    return function(scope, element, attrs) {
-
+  return {
+    restrict: 'A',
+    //scope: {
+    //  products: '=',
+    //},
+    link: function(scope, element, attrs) {
         var config = {
             url: 'http://localhost:5000/upload',
             maxFilesize: 100,
@@ -25,6 +30,63 @@ function dropzone() {
             },
 
             'success': function (file, response) {
+              var cls = response['srcElement']['response'];
+              //console.log("directive's controller: " + JSON.stringify(scope.products));
+              scope.$apply(function(){
+                scope.classification = cls;
+                //scope[attrs.ngModel] = cls //element.val();
+              });
+            }
+        };
+
+        var mydropzone = new Dropzone(element[0], config);
+
+        angular.forEach(eventHandlers, function(handler, event) {
+            mydropzone.on(event, handler);
+        });
+
+        scope.processDropzone = function() {
+            mydropzone.processQueue();
+        };
+
+        scope.resetDropzone = function() {
+            mydropzone.removeAllFiles();
+        }
+    }
+  };
+}
+
+
+/*
+
+function dropzone() {
+
+
+  return function(scope, element, attrs, $rootScope) {
+        var config = {
+            url: 'http://localhost:5000/upload',
+            maxFilesize: 100,
+            paramName: "uploadfile",
+            maxThumbnailFilesize: 10,
+            parallelUploads: 1,
+            autoProcessQueue: true
+        };
+
+        var eventHandlers = {
+            'addedfile': function(file) {
+                scope.file = file;
+                if (this.files[1]!=null) {
+                    this.removeFile(this.files[0]);
+                }
+                scope.$apply(function() {
+                    scope.fileAdded = true;
+                });
+            },
+
+            'success': function ($rootScope, file, response) {
+              var cls = response['srcElement']['response'];
+              scope.products = cls;
+              //console.log("directive's controller: " + JSON.stringify(scope.products));
             }
         };
 
@@ -43,13 +105,17 @@ function dropzone() {
         }
     }
 }
+*/
 
 angular.module('owlDemoApp')
   .directive('linearChart', function($window){
    return{
-      restrict:'EA',
+      restrict:'A',
       template:"<svg width='620' height='200'></svg>",
        link: function(scope, elem, attrs){
+
+           console.log(scope);
+
            var salesDataToPlot=scope[attrs.chartData];
            var padding = 20;
            var pathClass="path";
@@ -101,4 +167,4 @@ angular.module('owlDemoApp')
 });
 
 angular.module('owlDemoApp')
-  .directive('dropzone', dropzone)
+  .directive('dropzone', ['$rootScope', dropzone])
