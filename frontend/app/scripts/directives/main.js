@@ -77,8 +77,9 @@ angular.module('owlDemoApp')
           .call(xAxisGen);
 
         function drawLineChart() {
-          var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.1);
+          salesDataToPlot.sort((a, b) => b.value - a.value);
 
+          var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.1);
           yScale.domain(salesDataToPlot.map(function(d) { return d.name; }));
 
           var yAxisGen = d3.svg.axis()
@@ -97,13 +98,15 @@ angular.module('owlDemoApp')
 
           bars
             .enter().append("rect")
-            .attr("class", function(d) { return "bar bar--" + (d.value < 0 ? "negative" : "positive"); })
-            .attr("x", function(d) { console.log(d.value); return xScale(Math.min(0, d.value)); })
+            .attr("class", function(d) { return "bar bar--" + (d.value < 0 ? "negative" : "positive"); }); // Do NOT connect this part to the next. VERY IMPORTANT!!!
+
+          bars
+            .attr("x", function(d) { return xScale(Math.min(0, d.value)); })
             .attr("y", function(d) { return yScale(d.name); })
             .attr("width", function(d) { return Math.abs(xScale(d.value) - xScale(0)); })
             .attr("height", yScale.rangeBand());
 
-          bars.exit().remove();
+          //bars.exit().remove();
         }
 
         scope.$watchCollection(exp, function(newVal, oldVal){
