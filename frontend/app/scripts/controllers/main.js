@@ -35,7 +35,7 @@ angular.module('owlDemoApp')
   });
 
 angular.module('owlDemoApp')
-  .controller('SalesController', ['$scope', function($scope){
+  .controller('SalesController', ['$scope', '$interval', function($scope, $interval){
     $scope.salesData=[
         {name: "panda", value: 0.95},
         {name: "little panda", value: 0.02},
@@ -44,7 +44,7 @@ angular.module('owlDemoApp')
         {name: "oven", value: 0.005}
     ];
 
-    setInterval(function() {
+    $interval(function() {
       $scope.salesData.splice(Math.floor(Math.random() *  $scope.salesData.length), 1);
       $scope.salesData.push({
         name: Math.random()
@@ -53,7 +53,5 @@ angular.module('owlDemoApp')
         value: Math.random()
       });
 
-      }, 1000
-    );
-
+      }, 1000);
 }]);
