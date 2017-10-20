@@ -9,10 +9,12 @@
 </div>
 -->
 
-<div class="jumbotron">
+<div ng-controller="SalesController">
+
+<div class="jumbotron" >
 
     <div class="lead">
-        <form action="" class="dropzone" dropzone="" id="dropzone">
+        <form action="" class="dropzone" dropzone="" chart-data="salesData" id="dropzone">
             <div class="dz-default dz-message"></div>
             Click to Upload
         <form>
@@ -27,9 +29,11 @@
 
 </div>
 
-<div class="jumbotron" ng-controller="SalesController">
+<div class="jumbotron">
   <div linear-chart class=chart chart-data="salesData"></div>
   <div class="lead">
   Classification Result
   </div>
+</div>
+
 </div>

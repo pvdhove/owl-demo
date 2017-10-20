@@ -1,8 +1,14 @@
 'use strict';
 
 function dropzone() {
+  return {
+      restrict: 'EA',
+      scope: {
+        chartData: '='
+      },
+      link: function(scope, element, attrs) {
 
-    return function(scope, element, attrs) {
+        console.log(scope.chartData);
 
         var config = {
             url: 'http://localhost:5000/upload',
@@ -25,7 +31,14 @@ function dropzone() {
             },
 
             'success': function (file, response) {
-                alert(response)
+                //var exp = $parse(attrs.chartData);
+                //console.log(exp);
+                //var salesDataToPlot=exp(scope);
+                // console.log(salesDataToPlot);
+                var cls = JSON.parse(response);
+                //scope.chartData.push(cls);
+                scope.chartData = cls;
+                alert(response);
             }
         };
 
@@ -43,6 +56,7 @@ function dropzone() {
             mydropzone.removeAllFiles();
         }
     }
+  }
 }
 
 angular.module('owlDemoApp')
@@ -77,10 +91,11 @@ angular.module('owlDemoApp')
           .call(xAxisGen);
 
         function drawLineChart() {
-          salesDataToPlot.sort((a, b) => b.value - a.value);
+
+          salesDataToPlot.sort((a, b) => b.prop - a.prop);
 
           var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.1);
-          yScale.domain(salesDataToPlot.map(function(d) { return d.name; }));
+          yScale.domain(salesDataToPlot.map(function(d) { return d.class; }));
 
           var yAxisGen = d3.svg.axis()
             .scale(yScale)
@@ -98,19 +113,19 @@ angular.module('owlDemoApp')
 
           bars
             .enter().append("rect")
-            .attr("class", function(d) { return "bar bar--" + (d.value < 0 ? "negative" : "positive"); }); // Do NOT connect this part to the next. VERY IMPORTANT!!!
+            .attr("class", function(d) { return "bar bar--" + (d.prop < 0 ? "negative" : "positive"); }); // Do NOT connect this part to the next. VERY IMPORTANT!!!
 
           bars
-            .attr("x", function(d) { return xScale(Math.min(0, d.value)); })
-            .attr("y", function(d) { return yScale(d.name); })
-            .attr("width", function(d) { return Math.abs(xScale(d.value) - xScale(0)); })
+            .attr("x", function(d) { return xScale(Math.min(0, d.prop)); })
+            .attr("y", function(d) { return yScale(d.class); })
+            .attr("width", function(d) { return Math.abs(xScale(d.prop) - xScale(0)); })
             .attr("height", yScale.rangeBand());
-
           //bars.exit().remove();
         }
 
         scope.$watchCollection(exp, function(newVal, oldVal){
           salesDataToPlot = newVal;
+          console.log('fuck', salesDataToPlot);
           drawLineChart();
         });
 

@@ -37,13 +37,14 @@ angular.module('owlDemoApp')
 angular.module('owlDemoApp')
   .controller('SalesController', ['$scope', '$interval', function($scope, $interval){
     $scope.salesData=[
-        {name: "panda", value: 0.95},
-        {name: "little panda", value: 0.02},
-        {name: "monkey", value: 0.015},
-        {name: "tiger, india tiger", value: 0.01},
-        {name: "oven", value: 0.005}
+        {class: "panda", prop: 0.95},
+        {class: "little panda", prop: 0.02},
+        {class: "monkey", prop: 0.015},
+        {class: "tiger, india tiger", prop: 0.01},
+        {class: "oven", prop: 0.005}
     ];
 
+    /*
     $interval(function() {
       $scope.salesData.splice(Math.floor(Math.random() *  $scope.salesData.length), 1);
       $scope.salesData.push({
@@ -53,5 +54,5 @@ angular.module('owlDemoApp')
         value: Math.random()
       });
 
-      }, 1000);
+    }, 1000); */
 }]);

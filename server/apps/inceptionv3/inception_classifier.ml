@@ -31,12 +31,16 @@ let to_json ?(top=5) preds =
 
   Array.iteri (fun i x -> 
     let cls  = Hashtbl.find h x.(1) in 
-    let prop = (Dense.Matrix.S.get preds x.(0) x.(1)) *. 100. in 
-    let p = "{\"class\":\"" ^ cls ^ "\"; \"prop\": " ^ (string_of_float prop) ^ "} " in 
+    let prop = Dense.Matrix.S.get preds x.(0) x.(1) in 
+    let p = "{\"class\":\"" ^ cls ^ "\", \"prop\": " ^ (string_of_float prop) ^ "}," in 
     Array.set assos i p 
   ) tp;
 
-  "[" ^ (Array.fold_left (^) "" assos) ^ " ]"
+  let str  = Array.fold_left (^) "" assos in 
+  let str  = String.sub str 0 ((String.length str) - 1) in
+  let json = "[" ^ str ^ " ]" in 
+  Printf.printf "%s" json;
+  json
 
 let _ = 
   let img_name = Sys.argv.(1) in
