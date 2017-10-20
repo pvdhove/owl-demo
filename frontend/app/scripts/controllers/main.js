@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name owlDemoApp.controller:MainCtrl
+ * @name owlDemoApp.controller:FileCtrl
  * @description
  * # fileCtrl
  * Controller of the owlDemoApp
@@ -43,4 +43,17 @@ angular.module('owlDemoApp')
         {name: "tiger, india tiger", value: 0.01},
         {name: "oven", value: 0.005}
     ];
+
+    setInterval(function() {
+      $scope.salesData.splice(Math.floor(Math.random() *  $scope.salesData.length), 1);
+      $scope.salesData.push({
+        name: Math.random()
+          .toString(36)
+          .substring(7),
+        value: Math.random()
+      });
+
+      }, 1000
+    );
+
 }]);
