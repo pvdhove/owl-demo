@@ -81,7 +81,7 @@ angular.module('owlDemoApp')
         var color  = d3.scale.category20();
 
         var xScale = d3.scale.linear()
-          .range([padding + (width / 3), width - padding])
+          .range([padding + (width / 2), width - padding])
           .domain([0, 1.0]);
         var xAxisGen = d3.svg.axis().scale(xScale).orient("bottom");
         //xScale.domain(d3.extent(salesDataToPlot, function(d) { return d.value; })).nice();
@@ -92,31 +92,37 @@ angular.module('owlDemoApp')
           .call(xAxisGen);
 
 
-          function wrap(text, width) {
-            text.each(function() {
-              var text = d3.select(this),
-                  words = text.text().split(/\s+/).reverse(),
-                  word,
-                  line = [],
-                  lineNumber = 0,
-                  lineHeight = 1.1, // ems
-                  y = text.attr("y"),
-                  dy = parseFloat(text.attr("dy")),
-                  tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-              while (word = words.pop()) {
-                line.push(word);
+        function wrap(text, width) {
+          text.each(function() {
+            var text = d3.select(this),
+              words = text.text().split(/\s+/).reverse(),
+              word,
+              line = [],
+              lineNumber = 0,
+              lineHeight = 1.1, // ems
+              y = text.attr("y"),
+              dy = parseFloat(text.attr("dy")),
+              tspan = text.text(null).append("tspan").attr("x", -10).attr("y", y).attr("dy", dy + "em");
+
+            while (word = words.pop()) {
+              line.push(word);
+              tspan.text(line.join(" "));
+              if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
                 tspan.text(line.join(" "));
-                if (tspan.node().getComputedTextLength() > width) {
-                  line.pop();
-                  tspan.text(line.join(" "));
-                  line = [word];
-                  tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-                }
+                line = [word];
+                tspan = text.append("tspan")
+                  .attr("x", 0)
+                  .attr("y", y)
+                  .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                  .text(word);
               }
-            });
-          }
+            }
+          });
+        }
 
         function drawLineChart() {
+          svg.selectAll("*").remove();
           salesDataToPlot.sort((a, b) => b.prop - a.prop);
 
           var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.1);
@@ -134,7 +140,7 @@ angular.module('owlDemoApp')
             .attr("transform", "translate(" + xScale(0) + ",0)")
             .call(yAxisGen)//;
             .selectAll(".y text")
-            .call(wrap, (width / 3));
+            .call(wrap, (width / 2));
 
 
           var bars = svg.selectAll(".bar").data(salesDataToPlot);
@@ -150,15 +156,14 @@ angular.module('owlDemoApp')
             .attr('fill', function(d) { return color(d.prop); })
             .attr("height", yScale.rangeBand());
 
-          /*
+
           bars
             .enter()
             .append("text")
             .attr("fill", "#fff")
-            .attr("y", function(d, i){return i * 30 + 10;})
-            .attr("x", 15)
-            .text(function(d){return d.class;}); */
-
+            .attr("y", function(d, i) {return i * 26 + 25;})
+            .attr("x", function(d) { return xScale(d.prop) + 20; })
+            .text(function(d){return (d.prop * 100).toFixed(1) + '%';});
         }
 
         scope.$watchCollection(exp, function(newVal, oldVal){
