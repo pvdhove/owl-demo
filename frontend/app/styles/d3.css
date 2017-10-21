@@ -10,9 +10,9 @@
   stroke-dasharray: 1, 2;
 }
 
-.chart rect {
+/*.chart rect {
   fill: steelblue;
-}
+}*/
 
 .chart text {
   fill: black;
