@@ -3,15 +3,14 @@
 function dropzone() {
   return {
       restrict: 'EA',
-      /* scope: {
+      scope: {
         chartData: '='
-      }, */
+      },
       link: function(scope, element, attrs) {
 
-        console.log(scope.chartData);
+        //console.log(scope.chartData);
 
-        /*
-        element.on('click', function() {
+      /*  element.on('click', function() {
           scope.$emit('cliked-from-directive', {a:10})
         }); */
 
@@ -37,9 +36,9 @@ function dropzone() {
 
             'success': function (file, response) {
                 var cls = JSON.parse(response);
-                scope.$parent.chartData = cls;
-                scope.$emit('cliked-from-directive', cls);
-                alert(response);
+                scope.chartData = cls;
+                scope.$emit('cliked-from-directive', cls)
+                //alert(response);
             }
         };
 
@@ -126,7 +125,7 @@ angular.module('owlDemoApp')
         scope.$watchCollection(exp, function(newVal, oldVal){
           //alert("old:", oldVal);
           salesDataToPlot = newVal;
-          console.log('fuck', salesDataToPlot);
+          //console.log('fuck', salesDataToPlot);
           drawLineChart();
         });
 

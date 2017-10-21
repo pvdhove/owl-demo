@@ -44,13 +44,17 @@ angular.module('owlDemoApp')
         {class: "oven", prop: 0.005}
     ];
 
+    /*
     $scope.$watch('salesData', function() {
         alert('hey, myVar has changed!');
     })
+    */
+
 
     $scope.$on('cliked-from-directive', function(event, data){
-        console.log("from controller:", data);
-        $scope.salesData = data;
+        //console.log("from controller:", data);
+        // $scope.salesData = data; --> the source of lag
+        $scope.$apply(function() {$scope.salesData = data;});
     })
 
     /*
