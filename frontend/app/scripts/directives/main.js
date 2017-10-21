@@ -20,6 +20,8 @@ function dropzone() {
             paramName: "uploadfile",
             maxThumbnailFilesize: 10,
             parallelUploads: 1,
+            thumbnailWidth: 250,
+            thumbnailHeight: 250,
             autoProcessQueue: true
         };
 
