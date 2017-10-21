@@ -44,6 +44,15 @@ angular.module('owlDemoApp')
         {class: "oven", prop: 0.005}
     ];
 
+    $scope.$watch('salesData', function() {
+        alert('hey, myVar has changed!');
+    })
+
+    $scope.$on('cliked-from-directive', function(event, data){
+        console.log("from controller:", data);
+        $scope.salesData = data;
+    })
+
     /*
     $interval(function() {
       $scope.salesData.splice(Math.floor(Math.random() *  $scope.salesData.length), 1);

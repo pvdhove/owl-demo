@@ -3,12 +3,17 @@
 function dropzone() {
   return {
       restrict: 'EA',
-      scope: {
+      /* scope: {
         chartData: '='
-      },
+      }, */
       link: function(scope, element, attrs) {
 
         console.log(scope.chartData);
+
+        /*
+        element.on('click', function() {
+          scope.$emit('cliked-from-directive', {a:10})
+        }); */
 
         var config = {
             url: 'http://localhost:5000/upload',
@@ -31,13 +36,9 @@ function dropzone() {
             },
 
             'success': function (file, response) {
-                //var exp = $parse(attrs.chartData);
-                //console.log(exp);
-                //var salesDataToPlot=exp(scope);
-                // console.log(salesDataToPlot);
                 var cls = JSON.parse(response);
-                //scope.chartData.push(cls);
-                scope.chartData = cls;
+                scope.$parent.chartData = cls;
+                scope.$emit('cliked-from-directive', cls);
                 alert(response);
             }
         };
@@ -91,7 +92,6 @@ angular.module('owlDemoApp')
           .call(xAxisGen);
 
         function drawLineChart() {
-
           salesDataToPlot.sort((a, b) => b.prop - a.prop);
 
           var yScale = d3.scale.ordinal().rangeRoundBands([0, height], 0.1);
@@ -124,13 +124,13 @@ angular.module('owlDemoApp')
         }
 
         scope.$watchCollection(exp, function(newVal, oldVal){
+          //alert("old:", oldVal);
           salesDataToPlot = newVal;
           console.log('fuck', salesDataToPlot);
           drawLineChart();
         });
 
         drawLineChart();
-
       }
     }
 });
