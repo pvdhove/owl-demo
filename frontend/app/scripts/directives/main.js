@@ -7,13 +7,6 @@ function dropzone() {
         chartData: '='
       },
       link: function(scope, element, attrs) {
-
-        //console.log(scope.chartData);
-
-      /*  element.on('click', function() {
-          scope.$emit('cliked-from-directive', {a:10})
-        }); */
-
         var config = {
             url: 'http://localhost:5000/upload',
             maxFilesize: 100,
@@ -74,9 +67,24 @@ angular.module('owlDemoApp')
 
         var d3 = $window.d3;
         var rawSvg=elem.find('svg');
-        var svg = d3.select(rawSvg[0]);
+        var svg = d3.select(rawSvg[0]).append('svg').style('width', '100%');
+
+        /*
+        window.oneresize = function() {
+          scope.$apply();
+        }
+
+        scope.$watch(function() {
+          return angular.element($window)[0].innerWidth;
+        }, function() {
+          console.log("fuck!!");
+          drawLineChart();
+        }) */
+
+
         var w = rawSvg.attr("width");
         var h = rawSvg.attr("height");
+        //console.log("initial w and h:", w, h);
         var margin = {top: 20, right: 30, bottom: 40, left: 30};
         var width  = w - margin.left - margin.right;
         var height = h - margin.top - margin.bottom;
@@ -86,7 +94,6 @@ angular.module('owlDemoApp')
           .range([padding + (width / 2), width - padding])
           .domain([0, 1.0]);
         var xAxisGen = d3.svg.axis().scale(xScale).orient("bottom");
-        //xScale.domain(d3.extent(salesDataToPlot, function(d) { return d.value; })).nice();
 
         svg.append("g")
           .attr("class", "x axis")
@@ -168,11 +175,28 @@ angular.module('owlDemoApp')
             .text(function(d){return (d.prop * 100).toFixed(1) + '%';});
         }
 
+
+        /*
+        d3.select(window).on('resize', resize);
+
+        function resize() {
+          //w = rawSvg.attr("width"); --> fixed from the template.
+          //h = rawSvg.attr("height");
+          //w = $window.innerWidth; --> changed, but it's the outer size;
+          //h = $window.innerHeight;
+          console.log(w, h);
+          width  = w - margin.left - margin.right;
+          height = h - margin.top - margin.bottom;
+          xScale = d3.scale.linear()
+            .range([padding + (width / 2), width - padding])
+            .domain([0, 1.0]);
+          xAxisGen = d3.svg.axis().scale(xScale).orient("bottom");
+          drawLineChart();
+        }
+        */
+
         scope.$watchCollection(exp, function(newVal, oldVal){
-          //alert("old:", oldVal);
           salesDataToPlot = newVal;
-          //console.log('fuck', salesDataToPlot);
-          //svg.selectAll('*').remove();
           drawLineChart();
         });
 

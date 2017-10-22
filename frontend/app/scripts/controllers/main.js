@@ -36,13 +36,7 @@ angular.module('owlDemoApp')
 
 angular.module('owlDemoApp')
   .controller('SalesController', ['$scope', '$interval', function($scope, $interval){
-    $scope.salesData=[
-        {class: "panda", prop: 0.95},
-        {class: "little panda", prop: 0.02},
-        {class: "monkey", prop: 0.015},
-        {class: "tiger, india tiger", prop: 0.01},
-        {class: "oven", prop: 0.005}
-    ];
+    $scope.salesData= [];
 
     /*
     $scope.$watch('salesData', function() {
