@@ -36,7 +36,7 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">OwlDemo</a>
+            <a class="navbar-brand" href="index.html">OwlDemo</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -58,9 +58,48 @@
       </div>
     </div>
 
-    <div id="inception" class="container">
-    <div ng-include="'views/main.html'" ng-controller="fileCtrl" ng-cloak></div>
-    </div>
+    <div id="about" class="container">
+      <h2> Demo Code </h2>
+
+      Here are the code for two demos on the Gist:
+      <a href=https://gist.github.com/jzstark/6dfed11c521fb2cd286f2519fb88d3bf> Google InceptionV3</a>, <a href=https://gist.github.com/jzstark/5826ad7f75c589276984e8d4161ef3c7> Neural Style Transfer </a>.
+
+      <p> <b>Disclaimer:</b> We do not keep your updated image in our server for this demo. </p>
+
+      <h2> Owl </h2>
+
+      <p> Owl is an emerging numerical library for scientific computing and engineering. The library is developed in the OCaml language and inherits all its powerful features such as static type checking, powerful module system, and superior runtime efficiency. Owl allows you to write succinct type-safe numerical applications in functional language without sacrificing performance, significantly reduces the cost from prototype to production use. </p>
+
+      <p> Behind the scene, Owl builds the advanced numerical functions atop of its solid implementation of n-dimensional arrays. Quite different from other libraries, algorithmic differentiation and distributed computing have been included as integral components in the core library to maximise developers' productivity. Owl is young but grows fast, the current features include: </p>
+
+      <p>
+        <ul>
+          <li> N-dimensional array (both dense and sparse) </li>
+          <li> Various number types: float32, float64, complex32, complex64, int8, int16, int32 ... </li>
+          <li> Linear algebra and full interface to CBLAS and LAPACKE </li>
+          <li> Algorithmic differentiation (or automatic differentiation) </li>
+          <li> Neural network module for deep learning applications </li>
+          <li> Parallel and Distributed engine (map-reduce, parameter server, etc.) </li>
+          <li> Advanced math and stats functions (e.g., hypothesis tests, MCMC, etc.) </li>
+          <li> Zoo system for efficient scripting and code sharing </li>
+          <li> GPU support (work in progress) </li>
+        </ul>
+      </p>
+
+      <h2> Papers </h2>
+      <ul>
+        <li> Wang, Liang. "Owl: A general-purpose numerical library in ocaml." <a href=https://arxiv.org/abs/1707.09616>arXiv preprint</a> arXiv:1707.09616 (2017). </li>
+        <li> Wang, Liang, Ben Catterall, and Richard Mortier. "Probabilistic Synchronous Parallel." <a href=https://arxiv.org/abs/1709.07772>arXiv preprint</a> arXiv:1709.07772 (2017). </li>
+      </ul>
+
+      <h2> Contact </h2>
+
+      <a href=https://github.com/ryanrhymes/owl> Github</a>,
+      <a href=mailto:liang.wang@cl.cam.ac.uk> Email</a>,
+      <a href=https://join.slack.com/t/owl-dev-team/shared_invite/enQtMjQ3OTM1MDY4MDIwLTA3MmMyMmQ5Y2U0NjJiNjI0NzFhZDAwNGFhODBmMTk4N2ZmNDExYjZiMzI2N2M1MGNiMTUyYTQ5MTAzZjliZDI> Slack Channel</a>.
+
+  </div>
+
 
     <div class="footer">
       <div class="container">
