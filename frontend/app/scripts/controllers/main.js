@@ -37,6 +37,7 @@ angular.module('owlDemoApp')
 angular.module('owlDemoApp')
   .controller('SalesController', ['$scope', '$interval', function($scope, $interval){
     $scope.salesData= [];
+    $scope.processed = 0;
 
     /*
     $scope.$watch('salesData', function() {
@@ -48,7 +49,10 @@ angular.module('owlDemoApp')
     $scope.$on('cliked-from-directive', function(event, data){
         //console.log("from controller:", data);
         // $scope.salesData = data; --> the source of lag
-        $scope.$apply(function() {$scope.salesData = data;});
+        $scope.$apply(function() {
+          $scope.salesData = data[1];
+          $scope.processed = data[0];
+        });
     })
 
     /*

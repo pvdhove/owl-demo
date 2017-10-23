@@ -30,9 +30,10 @@ function dropzone() {
             },
 
             'success': function (file, response) {
-                var cls = JSON.parse(response);
+                // response: [counter, response]
+                var cls = JSON.parse(response[1]);
                 scope.chartData = cls;
-                scope.$emit('cliked-from-directive', cls)
+                scope.$emit('cliked-from-directive', [response[0], cls])
                 //alert(response);
             }
         };

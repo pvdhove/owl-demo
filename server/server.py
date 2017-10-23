@@ -5,7 +5,6 @@ from werkzeug import secure_filename
 import os, subprocess, json
 from subprocess import call
 
-
 app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = 'inception_img/'
@@ -23,7 +22,7 @@ def allowed_file(filename):
 @app.route('/upload', methods=['GET', 'POST', 'OPTIONS'])
 def index():
     if request.method == 'POST':
-        # files = request.files.getlist('file[]')  
+        # files = request.files.getlist('file[]')
         f = request.files.get('uploadfile', '')
         if f and allowed_file(f.filename):
             filename = secure_filename(f.filename)
@@ -36,14 +35,20 @@ def index():
             os.system(comm)
             resp = subprocess.check_output(['apps/inceptionv3/inception_classifier', new_img_addr])
             #d = json.loads(resp)
-            return resp
+            # Get counter number
+            with open('counter.txt', 'r+') as f:
+                old_counter = int(next(f))
+                new_counter = old_counter + 1
+                f.seek(0)
+                f.write(str(new_counter) + '\n')
+                f.truncate()
+            return jsonify([new_counter, resp])
         else:
             app.logger.info('ext name error')
-            return jsonify(error='ext name error')
+            return [] #jsonify(error='ext name error')
     return ""
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000,debug=True)
-
 
 # https://ampersandacademy.com/tutorials/flask-framework/flask-framework-ajax-file-upload
