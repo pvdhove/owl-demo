@@ -35,9 +35,18 @@ angular.module('owlDemoApp')
   });
 
 angular.module('owlDemoApp')
-  .controller('SalesController', ['$scope', '$interval', function($scope, $interval){
+  .controller('SalesController', ['$scope', '$interval', '$http', function($scope, $interval, $http){
     $scope.salesData= [];
     $scope.processed = 0;
+
+    $http.get('http://localhost:5000/counter')
+      .then(
+        function (data) {
+          $scope.processed = data.data;
+        },
+
+        function (error){}
+      );
 
     /*
     $scope.$watch('salesData', function() {
