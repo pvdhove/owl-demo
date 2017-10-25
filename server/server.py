@@ -19,6 +19,12 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+@app.route('/counter', methods=['GET', 'POST', 'OPTIONS'])
+def counter():
+    with open('counter.txt', 'r+') as f:
+        counter = int(next(f))
+    return jsonify(counter)
+
 @app.route('/upload', methods=['GET', 'POST', 'OPTIONS'])
 def index():
     if request.method == 'POST':
