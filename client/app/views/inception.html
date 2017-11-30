@@ -1,0 +1,34 @@
+<div ng-controller="SalesController">
+
+<h2> Demo: Google Inception V3 on Owl </h2>
+<div class="lead">
+<p>The code of this demo can be found in this <a href=https://gist.github.com/jzstark/6dfed11c521fb2cd286f2519fb88d3bf> Gist </a>. </p>
+</div>
+
+<div class="jumbotron" >
+
+    <div class="lead">
+        <form action="" class="dropzone" dropzone="" chart-data="salesData" id="dropzone">
+            <div class="dz-default dz-message">Click to Upload</div>
+        <form>
+    </div>
+
+</div>
+
+<div class="jumbotron">
+  <div linear-chart class=chart chart-data="salesData"></div>
+  <div class="lead">
+  Classification Result
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="lead">
+  Total number of processed images: {{processed}}
+</div>
+</div>
+
+<div>
+<p> <b>Disclaimer:</b> We do not keep your uploaded image in our server.</p>
+</div>
+</div>

@@ -1,0 +1,32 @@
+.axis path,
+.axis line{
+  fill: none;
+  shape-rendering:crispEdge;
+}
+
+.axis g.y{
+  fill: none;
+  stroke:black;
+  shape-rendering:crispEdge;
+}
+
+.tick
+{
+  stroke-dasharray: 1, 2;
+}
+
+/*.chart rect {
+  fill: steelblue;
+}*/
+
+.chart text {
+  fill: black;
+  font: 13px sans-serif;
+  text-anchor: middle;
+}
+
+.chart .label {
+  fill: black;
+  font: 13px sans-serif;
+  text-anchor: end;
+}
