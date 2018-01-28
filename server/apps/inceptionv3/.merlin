@@ -1,0 +1,14 @@
+B _build/default
+FLG -w -40
+PKG bigarray
+PKG bytes
+PKG ctypes
+PKG ctypes.stubs
+PKG dolog
+PKG eigen
+PKG gsl
+PKG integers
+PKG owl
+PKG plplot
+PKG str
+PKG unix
