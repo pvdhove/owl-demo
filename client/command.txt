@@ -1,1 +1,1 @@
-docker run --name nginx -p 80:80 -v /home/stark/Code/owl-demo/frontend/app/:/usr/share/nginx/html -v /home/stark/Code/owl-demo/frontend/default.conf:/etc/nginx/conf.d/default.conf -d nginx
+docker run --name nginx -p 80:80 -v $HOME/Code/owl-demo/client/app/:/usr/share/nginx/html -v $HOME/Code/owl-demo/client/default.conf:/etc/nginx/conf.d/default.conf -d nginx
