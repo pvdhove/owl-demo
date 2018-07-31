@@ -56,6 +56,62 @@ function dropzone() {
   }
 }
 
+function dropzone2() {
+  return {
+      restrict: 'EA',
+      scope: {
+        chartData: '='
+      },
+      link: function(scope, element, attrs) {
+        var config = {
+            //url: 'http://localhost:5000/upload',
+            url: 'http://localhost:5001/upload',
+            maxFilesize: 100,
+            paramName: "uploadfile",
+            maxThumbnailFilesize: 10,
+            parallelUploads: 1,
+            thumbnailWidth: 250,
+            thumbnailHeight: 250,
+            autoProcessQueue: true
+        };
+
+        var eventHandlers = {
+            'addedfile': function(file) {
+                scope.file = file;
+                if (this.files[1]!=null) {
+                    this.removeFile(this.files[0]);
+                }
+                scope.$apply(function() {
+                    scope.fileAdded = true;
+                });
+            },
+
+            'success': function (file, response) {
+                // response: [counter, response]
+                var cls = JSON.parse(response[1]);
+                scope.chartData = cls;
+                scope.$emit('cliked-from-directive2', [response[0], cls])
+                //alert(response);
+            }
+        };
+
+        var mydropzone = new Dropzone(element[0], config);
+
+        angular.forEach(eventHandlers, function(handler, event) {
+            mydropzone.on(event, handler);
+        });
+
+        scope.processDropzone = function() {
+            mydropzone.processQueue();
+        };
+
+        scope.resetDropzone = function() {
+            mydropzone.removeAllFiles();
+        }
+    }
+  }
+}
+
 angular.module('owlDemoApp')
   .directive('linearChart', function($parse, $window){
     return{
@@ -209,3 +265,6 @@ angular.module('owlDemoApp')
 
 angular.module('owlDemoApp')
   .directive('dropzone', dropzone)
+
+angular.module('owlDemoApp')
+  .directive('dropzone2', dropzone2)

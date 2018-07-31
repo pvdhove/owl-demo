@@ -9,7 +9,7 @@
  */
 
 
- function fileCtrl ($scope) {
+function fileCtrl ($scope) {
      $scope.partialDownloadLink = 'http://localhost:5000/download?filename=';
      $scope.filename = '';
 
@@ -25,6 +25,22 @@
 angular.module('owlDemoApp')
    .controller('fileCtrl', fileCtrl);
 
+function fileCtrl2 ($scope) {
+     $scope.partialDownloadLink = 'http://localhost:5001/download?filename=';
+     $scope.filename = '';
+
+     $scope.uploadFile = function() {
+         $scope.processDropzone();
+     };
+
+     $scope.reset = function() {
+         $scope.resetDropzone();
+     };
+ }
+
+angular.module('owlDemoApp')
+   .controller('fileCtrl2', fileCtrl2);
+
 angular.module('owlDemoApp')
   .controller('MainCtrl', function () {
     this.awesomeThings = [
@@ -39,7 +55,8 @@ angular.module('owlDemoApp')
     $scope.salesData= [];
     $scope.processed = 0;
 
-    $http.get('http://138.68.155.178:5000/counter')
+    //$http.get('http://138.68.155.178:5000/counter')
+    $http.get('http://localhost:5001/counter')
       .then(
         function (data) {
           $scope.processed = data.data;
@@ -75,4 +92,28 @@ angular.module('owlDemoApp')
       });
 
     }, 1000); */
+}]);
+
+
+angular.module('owlDemoApp')
+  .controller('SalesController2', ['$scope', '$interval', '$http', function($scope, $interval, $http){
+    $scope.salesData = [];
+    $scope.processed = 0;
+
+    $http.get('http://localhost:5001/counter')
+      .then(
+        function (data) {
+          $scope.processed = data.data;
+        },
+        function (error){}
+      );
+
+    $scope.$on('cliked-from-directive2', function(event, data){
+        //console.log("from controller:", data);
+        // $scope.salesData = data; --> the source of lag
+        $scope.$apply(function() {
+          $scope.salesData = data[1];
+          $scope.processed = data[0];
+        });
+    })
 }]);
