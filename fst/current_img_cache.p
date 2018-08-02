@@ -1,0 +1,13 @@
+(dp0
+S'fst_img/example.png'
+p1
+(dp2
+V0
+p3
+S'/tmp/fstout3f03d9.png'
+p4
+sV2
+p5
+S'/tmp/fstout35bfb7.png'
+p6
+ss.
