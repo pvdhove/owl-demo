@@ -11,7 +11,7 @@ CORS(app)
 app.config['UPLOAD_FOLDER'] = 'fst_img/'
 
 img_dir = '/tmp/'
-#img_dir = 'output_img/'
+#img_dir = 'fst_img/'
 cache_dict = "current_img_cache.p"
 
 @app.route('/')

@@ -4,7 +4,7 @@ open Neural.S.Graph
 open Neural.S.Algodiff
 module N = Dense.Ndarray.S
 
-(* let output_dir = "/home/stark/Code/owl-demo/fstapp/output_img" *)
+(* let output_dir = "/home/stark/Code/owl-demo/fst/fst_img" *)
 let output_dir = "/tmp"
 
 (** Network Structure *)
@@ -112,7 +112,6 @@ let run ?(style=0) content_img output_img =
   in
   Graph.load_weights nn style_file;
   let result = Graph.model nn content_img in
-
   convert_arr_to_img result output_img
 
 let _ =
@@ -124,8 +123,7 @@ let _ =
    (*
    let cmd = Printf.sprintf "convert %s -resize 200x200\\! %s" out_img out_img in
    Sys.command cmd |> ignore;
-   Unix.chmod out_img 0o775;
-   *)
+   Unix.chmod out_img 0o775; *)
    let out_img = Filename.basename out_img in
    Printf.printf "%s" out_img;
    out_img
