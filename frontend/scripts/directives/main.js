@@ -14,8 +14,8 @@ function dropzone() {
             paramName: "uploadfile",
             maxThumbnailFilesize: 10,
             parallelUploads: 1,
-            thumbnailWidth: 250,
-            thumbnailHeight: 250,
+            thumbnailWidth: 210,
+            thumbnailHeight: 210,
             autoProcessQueue: true
         };
 
@@ -68,8 +68,8 @@ function dropzone2() {
             paramName: "uploadfile",
             maxThumbnailFilesize: 10,
             parallelUploads: 1,
-            thumbnailWidth: 250,
-            thumbnailHeight: 250,
+            thumbnailWidth: 210,
+            thumbnailHeight: 210,
             autoProcessQueue: true
         };
 

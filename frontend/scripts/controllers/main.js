@@ -115,18 +115,20 @@ angular.module('owlDemoApp')
     });
 
     $scope.categories = [
-       { id: 0, name: "\"Udnie\" by Francis Picabia"},
-       { id: 1, name: "\"The Great Wave off Kanagawa\" by Hokusai"},
-       { id: 2, name: "\"Rain Princess\" by Leonid Afremov"},
-       { id: 3, name: "\"La Muse\" by Picasso"},
-       { id: 4, name: "\"The Scream\" by Edvard Munch"},
-       { id: 5, name: "\"The shipwreck of the Minotaur\" by J. M. W. Turner"},
+       { id: 0, name: "\"Udnie\" by Francis Picabia", url:"images/fs1.jpg"},
+       { id: 1, name: "\"The Great Wave off Kanagawa\" by Hokusai", url:"images/fs2.jpg"},
+       { id: 2, name: "\"Rain Princess\" by Leonid Afremov", url:"images/fs3.jpg"},
+       { id: 3, name: "\"La Muse\" by Picasso", url:"images/fs4.jpg"},
+       { id: 4, name: "\"The Scream\" by Edvard Munch", url:"images/fs5.jpg"},
+       { id: 5, name: "\"The shipwreck of the Minotaur\" by J. M. W. Turner", url:"images/fs6.jpg"},
     ];
 
     $scope.itemSelected = $scope.categories[0];
 
     $scope.onCategoryChange = function () {
         // console.log("Selected Value: " + $scope.itemSelected.id + "\nSelected Text: " + $scope.itemSelected.name);
+        $scope.style_img = $scope.itemSelected.url;
+
         if ($('.dz-image').length > 0) {
           var input_name = $('.dz-image')[0].firstChild['alt'];
           var payload = {
