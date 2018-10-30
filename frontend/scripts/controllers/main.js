@@ -38,10 +38,27 @@ function fileCtrl2 ($scope) {
      $scope.reset = function() {
          $scope.resetDropzone();
      };
+}
+
+angular.module('owlDemoApp')
+    .controller('fileCtrl2', fileCtrl2);
+
+function fileCtrl3 ($scope) {
+     $scope.partialDownloadLink = 'http://localhost:5002/download?filename=';
+     //$scope.partialDownloadLink = 'http://138.68.55.178:5002/download?filename=';
+     $scope.filename = '';
+
+     $scope.uploadFile = function() {
+         $scope.processDropzone();
+     };
+
+     $scope.reset = function() {
+         $scope.resetDropzone();
+     };
  }
 
 angular.module('owlDemoApp')
-   .controller('fileCtrl2', fileCtrl2);
+    .controller('fileCtrl3', fileCtrl3);
 
 angular.module('owlDemoApp')
   .controller('MainCtrl', function () {
@@ -150,4 +167,31 @@ angular.module('owlDemoApp')
             );
         }
     };
+}]);
+
+
+angular.module('owlDemoApp')
+  .controller('SalesController3', ['$scope', '$interval', '$http', function($scope, $interval, $http){
+    $scope.processed = 0;
+
+    //$http.get('http://138.68.155.178:5002/counter')
+    $http.get('http://localhost:5002/counter')
+      .then(
+        function (data) {
+          $scope.processed = data.data;
+        },
+
+        function (error){}
+      );
+
+    $scope.$on('clicked-from-directive3', function(event, data){
+        //console.log("from controller:", data);
+        // $scope.salesData = data; --> the source of lag
+        $scope.$apply(function() {
+            $scope.processed = data[0];
+            $scope.image = data[1];
+	    $scope.cls = data[2];
+        });
+    })
+
 }]);
