@@ -190,7 +190,7 @@ angular.module('owlDemoApp')
         $scope.$apply(function() {
             $scope.processed = data[0];
             $scope.image = data[1];
-	    $scope.cls = data[2];
+	    //$scope.cls = data[2];
         });
     })
 

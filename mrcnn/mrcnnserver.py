@@ -10,8 +10,7 @@ app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = 'mrcnn_img/'
 
-img_dir = '/tmp/'
-cache_dict = "current_img_cache.p"
+img_dir = 'results/'
 
 @app.route('/')
 def hello_world():
@@ -31,7 +30,6 @@ def counter():
 
 @app.route('/upload', methods=['GET', 'POST', 'OPTIONS'])
 def index():
-    print("coucou\n")
     if request.method == 'POST':
         # files = request.files.getlist('file[]')
 
@@ -47,7 +45,7 @@ def index():
                 print(e.output)
                 raise
                 
-            new_img = "results/" + filename
+            new_img = img_dir + filename
 
             #d = json.loads(resp)
             # Get counter number
