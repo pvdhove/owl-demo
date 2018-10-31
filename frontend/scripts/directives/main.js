@@ -145,10 +145,7 @@ function dropzone3() {
             },
 
             'success': function (file, response) {
-		//var cls = JSON.parse(response[2]);
-		console.log(response[1]);
-		//scope.chartData = cls;
-                scope.$emit('clicked-from-directive3', [response[0], response[1]]);
+                scope.$emit('clicked-from-directive3', [response[0], response[1], response[2]]);
             }
         };
 

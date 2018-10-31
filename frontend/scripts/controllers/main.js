@@ -173,6 +173,7 @@ angular.module('owlDemoApp')
 angular.module('owlDemoApp')
   .controller('SalesController3', ['$scope', '$interval', '$http', function($scope, $interval, $http){
     $scope.processed = 0;
+    $scope.salesData = "";
 
     //$http.get('http://138.68.155.178:5002/counter')
     $http.get('http://localhost:5002/counter')
@@ -190,7 +191,7 @@ angular.module('owlDemoApp')
         $scope.$apply(function() {
             $scope.processed = data[0];
             $scope.image = data[1];
-	    //$scope.cls = data[2];
+	    $scope.salesData = data[2];
         });
     })
 
